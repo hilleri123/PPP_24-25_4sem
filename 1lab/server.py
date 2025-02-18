@@ -13,7 +13,7 @@ DATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "programs_i
 SERVER_HOST = "127.0.0.1"  # IP-адрес сервера
 SERVER_PORT = 5000  # Порт сервера
 DEFAULT_INTERVAL = int(os.environ.get("LAUNCH_INTERVAL", "10"))  # Интервал запуска программ (по умолчанию 10 секунд)
-LOGGING = False
+LOGGING = True
 
 logging.basicConfig(level=logging.INFO,  # Настройка уровня логирования
                     format="%(asctime)s [%(levelname)s] %(message)s")  # Формат логов

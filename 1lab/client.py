@@ -2,10 +2,44 @@ import socket  # Импортируем модуль для работы с се
 import sys  # Импортируем модуль для работы с системными параметрами и функциями
 import logging  # Импортируем модуль для логирования
 import signal  # Импортируем модуль для обработки сигналов
+import readline
+# Список доступных команд и их возможных аргументов для автодополнения
+COMMANDS = ["ADD", "GET", "STOP", "RESUME", "CHANGE", "SHOW", "VERBOSE", "EXIT", "HELP"]
+ARGS = {
+    "ADD": ["<program_name>"],
+    "GET": ["<program_name>"],
+    "STOP": ["<program_name>"],
+    "RESUME": ["<program_name>"],
+    "CHANGE": ["<program_name>", "<new_interval>"],
+    "VERBOSE": ["TRUE", "FALSE", "<program_name>"],
+}
+
+# Функция автодополнения для readline
+def completer(text, state):
+    buffer = readline.get_line_buffer()
+    tokens = buffer.split()
+    # Если пользователь ещё вводит название команды (первый токен)
+    if len(tokens) == 0 or (len(tokens) == 1 and not buffer.endswith(" ")):
+        matches = [cmd for cmd in COMMANDS if cmd.startswith(text.upper())]
+    else:
+        # Если уже введена команда, предлагаем подсказки для аргументов
+        cmd = tokens[0].upper()
+        if cmd in ARGS:
+            matches = [arg for arg in ARGS[cmd] if arg.startswith(text)]
+        else:
+            matches = []
+    try:
+        return matches[state]
+    except IndexError:
+        return None
+
+# Настройка автодополнения при нажатии Tab
+readline.set_completer(completer)
+readline.parse_and_bind("tab: complete")
 
 SERVER_HOST = "127.0.0.1"  # IP-адрес сервера
 SERVER_PORT = 5000  # Порт сервера
-LOGGING = False
+LOGGING = True
 
 logging.basicConfig(level=logging.INFO,  # Настройка уровня логирования
                     format="%(asctime)s [%(levelname)s] %(message)s")  # Формат логов
