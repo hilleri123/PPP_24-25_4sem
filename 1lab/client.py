@@ -27,7 +27,7 @@ def send_command(command):
         client_socket.send(struct.pack('>I', len(encrypted_command)) + encrypted_command)
 
         data_len = struct.unpack('>I', client_socket.recv(4))[0]
-        encrypted_data = client_socket.recv(data_len)
+        encrypted_data = client_socket.recv(data_len) #зашифрованные данные
         data = xor_encrypt_decrypt(encrypted_data)
 
         client_socket.close()
