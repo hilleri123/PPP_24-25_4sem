@@ -1,0 +1,210 @@
+[
+    {
+        "status": "running",
+        "pid": 0,
+        "name": "System Idle Process"
+    },
+    {
+        "status": "running",
+        "pid": 4,
+        "name": "System"
+    },
+    {
+        "status": "stopped",
+        "pid": 56,
+        "name": ""
+    },
+    {
+        "status": "running",
+        "pid": 80,
+        "name": "fontdrvhost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 108,
+        "name": "Registry"
+    },
+    {
+        "status": "running",
+        "pid": 124,
+        "name": "WINWORD.EXE"
+    },
+    {
+        "status": "running",
+        "pid": 224,
+        "name": "msedge.exe"
+    },
+    {
+        "status": "running",
+        "pid": 452,
+        "name": "smss.exe"
+    },
+    {
+        "status": "running",
+        "pid": 472,
+        "name": "WUDFHost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 476,
+        "name": "UserOOBEBroker.exe"
+    },
+    {
+        "status": "running",
+        "pid": 656,
+        "name": "csrss.exe"
+    },
+    {
+        "status": "running",
+        "pid": 772,
+        "name": "wininit.exe"
+    },
+    {
+        "status": "running",
+        "pid": 780,
+        "name": "csrss.exe"
+    },
+    {
+        "status": "running",
+        "pid": 788,
+        "name": "SynTPEnh.exe"
+    },
+    {
+        "status": "running",
+        "pid": 840,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 844,
+        "name": "services.exe"
+    },
+    {
+        "status": "running",
+        "pid": 852,
+        "name": "LsaIso.exe"
+    },
+    {
+        "status": "running",
+        "pid": 872,
+        "name": "lsass.exe"
+    },
+    {
+        "status": "running",
+        "pid": 996,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1080,
+        "name": "browser.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1096,
+        "name": "winlogon.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1176,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1204,
+        "name": "fontdrvhost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1220,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1308,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1332,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1352,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1364,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1396,
+        "name": "RuntimeBroker.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1400,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1440,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1448,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1456,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1500,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1520,
+        "name": "steamwebhelper.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1548,
+        "name": "dwm.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1572,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1608,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1656,
+        "name": "steamwebhelper.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1664,
+        "name": "python.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1688,
+        "name": "svchost.exe"
+    },
+    {
+        "status": "running",
+        "pid": 1696,
+        "name": "Telegram.exe
