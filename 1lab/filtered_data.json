@@ -1,0 +1,66 @@
+{
+    "C:\\Users\\User\\PycharmProjects\\PPP_24-25_4sem\\.venv\\Scripts": [
+        {
+            "name": "activate",
+            "size": 2258,
+            "modified": "Fri Mar 14 12:36:40 2025"
+        },
+        {
+            "name": "activate.bat",
+            "size": 1068,
+            "modified": "Fri Mar 14 12:36:40 2025"
+        },
+        {
+            "name": "activate.fish",
+            "size": 3088,
+            "modified": "Fri Mar 14 12:36:40 2025"
+        },
+        {
+            "name": "activate.nu",
+            "size": 2773,
+            "modified": "Fri Mar 14 12:36:40 2025"
+        },
+        {
+            "name": "activate.ps1",
+            "size": 1654,
+            "modified": "Fri Mar 14 12:36:40 2025"
+        },
+        {
+            "name": "activate_this.py",
+            "size": 1332,
+            "modified": "Fri Mar 14 12:36:40 2025"
+        },
+        {
+            "name": "deactivate.bat",
+            "size": 537,
+            "modified": "Fri Mar 14 12:36:40 2025"
+        }
+    ],
+    "C:\\Windows\\system32": [
+        {
+            "name": "RMActivate.exe",
+            "size": 602112,
+            "modified": "Thu Sep 12 20:14:31 2024"
+        },
+        {
+            "name": "RMActivate_isv.exe",
+            "size": 626688,
+            "modified": "Thu Sep 12 20:14:31 2024"
+        },
+        {
+            "name": "RMActivate_ssp.exe",
+            "size": 520192,
+            "modified": "Thu Sep 12 20:14:31 2024"
+        },
+        {
+            "name": "RMActivate_ssp_isv.exe",
+            "size": 524288,
+            "modified": "Thu Sep 12 20:14:31 2024"
+        },
+        {
+            "name": "phoneactivate.exe",
+            "size": 129504,
+            "modified": "Sat May  7 08:19:45 2022"
+        }
+    ]
+}

@@ -24,7 +24,7 @@ def scan_path():
             try:
                 for file in os.listdir(directory):
                     file_path = os.path.join(directory, file)
-                    if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
+                    if os.path.isfile(file_path) and os.access(file_path, os.X_OK): #является ли файлом и имеет права на выполнение
                         executables.append({
                             'name': file,
                             'size': os.path.getsize(file_path),
@@ -68,7 +68,7 @@ def main():
             client_socket, addr = server_socket.accept()
             logging.info(f"Connected to {addr}")
 
-            data_len = struct.unpack('>I', client_socket.recv(4))[0]
+            data_len = struct.unpack('>I', client_socket.recv(4))[0] #первые 4 байта от клиента (большой порядок данных)
             encrypted_data = client_socket.recv(data_len)
             data = xor_encrypt_decrypt(encrypted_data).decode('utf-8')
 
