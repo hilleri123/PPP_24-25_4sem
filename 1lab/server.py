@@ -4,6 +4,7 @@ import socket
 import traceback
 import scheme
 import query_analyzer
+from blocking_protocol import BlockingProtocol
 
 file_handler = logging.FileHandler(filename='tmp.log')
 stdout_handler = logging.StreamHandler(stream=sys.stdout)
@@ -20,23 +21,24 @@ PORT = 12345
 
 
 class Server:
-    def __init__(self, host=HOST, port=PORT):
+    def __init__(self, protocol_handler, host=HOST, port=PORT):
         self.host = host
         self.port = port
+        self.protocol_handler = protocol_handler
         self.logger = logging.getLogger('Server')
 
     def handle_client(self, client_socket):
-        received_text = client_socket.recv(1000).decode("utf-8")
+        received_text = self.protocol_handler.recv(self, client_socket)
         while received_text.lower() != 'exit':
             if received_text.lower() == 'json':
                 self.logger.info(f'Query: {received_text}')
-                client_socket.send(bytes(scheme.get_json_scheme(), 'utf-8'))
+                self.protocol_handler.send(self, client_socket, scheme.get_json_scheme())
                 self.logger.info(f'Answer: {query_analyzer.process_query(received_text)}')
             else:
                 self.logger.info(f'Query: {received_text}')
-                client_socket.send(bytes(query_analyzer.process_query(received_text), 'utf-8'))
+                self.protocol_handler.send(self, client_socket, query_analyzer.process_query(received_text))
                 self.logger.info(f'Answer: {query_analyzer.process_query(received_text)}')
-            received_text = client_socket.recv(1000).decode("utf-8")
+            received_text = self.protocol_handler.recv(self, client_socket)
 
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -58,5 +60,5 @@ class Server:
 
 
 if __name__ == '__main__':
-    my_server = Server()
+    my_server = Server(BlockingProtocol)
     my_server.run()
