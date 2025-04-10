@@ -28,17 +28,17 @@ class Server:
         self.logger = logging.getLogger('Server')
 
     def handle_client(self, client_socket):
-        received_text = self.protocol_handler.recv(self, client_socket)
+        received_text = self.protocol_handler.recv(client_socket)
         while received_text.lower() != 'exit':
             if received_text.lower() == 'json':
                 self.logger.info(f'Query: {received_text}')
-                self.protocol_handler.send(self, client_socket, scheme.get_json_scheme())
+                self.protocol_handler.send(client_socket, scheme.get_json_scheme())
                 self.logger.info(f'Answer: {query_analyzer.process_query(received_text)}')
             else:
                 self.logger.info(f'Query: {received_text}')
-                self.protocol_handler.send(self, client_socket, query_analyzer.process_query(received_text))
+                self.protocol_handler.send(client_socket, query_analyzer.process_query(received_text))
                 self.logger.info(f'Answer: {query_analyzer.process_query(received_text)}')
-            received_text = self.protocol_handler.recv(self, client_socket)
+            received_text = self.protocol_handler.recv(client_socket)
 
     def run(self):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -60,5 +60,5 @@ class Server:
 
 
 if __name__ == '__main__':
-    my_server = Server(BlockingProtocol)
+    my_server = Server(BlockingProtocol())
     my_server.run()
