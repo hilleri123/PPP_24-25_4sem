@@ -1,6 +1,8 @@
 import logging
 import sys
 import socket
+from blocking_protocol import BlockingProtocol
+
 
 file_handler = logging.FileHandler(filename='tmp.log')
 stdout_handler = logging.StreamHandler(stream=sys.stdout)
@@ -17,9 +19,10 @@ PORT = 12345
 
 
 class Client:
-    def __init__(self, host=HOST, port=PORT):
+    def __init__(self, protocol_handler, host=HOST, port=PORT):
         self.host = host
         self.port = port
+        self.protocol_handler = protocol_handler
         self.logger = logging.getLogger('Client')
 
     def run(self):
@@ -27,12 +30,13 @@ class Client:
             s.connect((self.host, self.port))
             command = input("Type query:\n")
             while command.lower() != 'exit':
-                s.send(bytes(command, 'utf-8'))
-                received_text = s.recv(1000).decode("utf-8")
+                self.protocol_handler.send(self, s, command)
+                received_text = self.protocol_handler.recv(self, s)
                 print(received_text)
                 command = input("Type query:\n")
 
 
 if __name__ == '__main__':
-    my_client = Client()
+    my_client = Client(BlockingProtocol)
     my_client.run()
+
