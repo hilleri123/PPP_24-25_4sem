@@ -30,13 +30,13 @@ class Client:
             s.connect((self.host, self.port))
             command = input("Type query:\n")
             while command.lower() != 'exit':
-                self.protocol_handler.send(self, s, command)
-                received_text = self.protocol_handler.recv(self, s)
+                self.protocol_handler.send(s, command)
+                received_text = self.protocol_handler.recv(s)
                 print(received_text)
                 command = input("Type query:\n")
 
 
 if __name__ == '__main__':
-    my_client = Client(BlockingProtocol)
+    my_client = Client(BlockingProtocol())
     my_client.run()
 
