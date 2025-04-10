@@ -16,13 +16,10 @@ def filter_df_by_columns(df, columns):
 
 
 def add_quotes_to_string_values(condition):
-    # Разбиваем условие на части по операторам сравнения (=, !=, <, >, <=, >=)
     parts = re.split(r'(\s*=\s*|\s*!=\s*|\s*<\s*|\s*>\s*|\s*<=\s*|\s*>=|\s+LIKE\s+)', condition, flags=re.IGNORECASE)
 
-    # Обрабатываем каждую часть
     for i in range(2, len(parts), 2):
         value = parts[i].strip()
-        # Если значение не число и не в кавычках
         if not (value.startswith(("'", '"')) or
                 value.replace('.', '', 1).isdigit() or
                 value.lower() in ('null', 'true', 'false')):
@@ -32,9 +29,7 @@ def add_quotes_to_string_values(condition):
 
 
 def process_condition(condition):
-    # 1. Добавляем кавычки к строковым значениям
     condition = add_quotes_to_string_values(condition)
-    # 2. Заменяем SQL-равенство (=) на Python-равенство (==)
     condition = re.sub(r'(?<!\=)\=(?!\=)', '==', condition)
     return condition
 
