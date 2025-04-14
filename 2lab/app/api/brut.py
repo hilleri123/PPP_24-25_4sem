@@ -50,6 +50,7 @@ async def brut_file(
     with open(temp_file_path.split('.')[0] + '.txt', "r") as f:
         hash_value = f.readlines()[0]
 
+
     
     generate_passwords(charset, max_length, temp_file_path.split('.')[0] + '_passwords.txt')
     found_password = brute_force_rar(temp_file_path, temp_file_path.split('.')[0] + '_passwords.txt')
@@ -70,7 +71,8 @@ async def brut_file(
     os.remove(temp_file_path.split('.')[0] + '_passwords.txt')
     
     return {
-        "task_id": list(tasks.keys())[-1]
+        "task_id": list(tasks.keys())[-1],
+        "hash": hash_value
     }
 
 @router.get(FastApiServerInfo.GET_STATUS)

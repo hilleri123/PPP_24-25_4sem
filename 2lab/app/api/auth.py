@@ -1,11 +1,12 @@
-
+import os
 from app.core.endpoints import FastApiServerInfo
 from fastapi import APIRouter
 import secrets
 import sqlite3
 from app.schemas.schemas import User
 
-DB_PATH = "app/db/database.db"
+DB_PATH = os.path.join('app','db','database.db')
+#"')"app/db/database.db"
 router = APIRouter()
 # Добавление нового пользователя в бд
 @router.post(FastApiServerInfo.SIGN_UP_ENDPOINT)
