@@ -28,7 +28,7 @@ if 0:#input('Update required libraries [y/n]?').lower() == 'y':
 
 from fastapi import FastAPI
 import uvicorn
-from app.api.endpoints import FastApiServerInfo
+from app.core.endpoints import FastApiServerInfo
 from app.api import auth
 from app.api import brut
 

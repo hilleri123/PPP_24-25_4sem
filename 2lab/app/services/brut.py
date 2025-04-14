@@ -1,9 +1,13 @@
 import subprocess
 import itertools
 import rarfile
+from app.core.endpoints import FastApiServerInfo
 
+UNRAR_TOOL = FastApiServerInfo.UNRAR_TOOL
 
-rarfile.UNRAR_TOOL = r"C:\Program Files (x86)\WinRAR\UnRAR.exe"
+rarfile.UNRAR_TOOL = UNRAR_TOOL
+
+r"C:\Program Files\WinRAR\UnRAR.exe"
 
 def extract_rar_hash(archive_path):
     """

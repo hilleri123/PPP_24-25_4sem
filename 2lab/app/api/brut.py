@@ -1,4 +1,4 @@
-from app.api.endpoints import FastApiServerInfo
+from app.core.endpoints import FastApiServerInfo
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
 from app.services.brut import *
 import os
@@ -61,7 +61,7 @@ async def brut_file(
         }
     else:
         tasks[list(tasks.keys())[-1]] = {
-        "status": "completed",
+        "status": "failed",
         "progress": 100,
         "result": "null",
         }
@@ -75,4 +75,6 @@ async def brut_file(
 
 @router.get(FastApiServerInfo.GET_STATUS)
 async def get_status(task_id: int):
-    return tasks[task_id]
+    return {
+        "task_id":tasks[task_id]
+    }

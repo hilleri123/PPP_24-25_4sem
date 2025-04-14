@@ -1,5 +1,5 @@
 
-from app.api.endpoints import FastApiServerInfo
+from app.core.endpoints import FastApiServerInfo
 from fastapi import APIRouter
 import secrets
 import sqlite3
