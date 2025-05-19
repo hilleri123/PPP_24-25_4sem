@@ -1,0 +1,10 @@
+https://websocketking.com/
+
+ws://localhost:8000/ws/2f5a513a-c07b-48c8-99eb-3f8dc312ec7f
+
+Сервер: uvicorn app.main:app --reload
+Celery Worker: celery -A app.celery_app worker --pool=solo --loglevel=info
+Клиент: запуска client.py
+Отправка запросов: curl -X POST "http://localhost:8000/api/search_algorithm" \
+-H "Content-Type: application/json" \
+-d '{"word":"example","algorithm":"levenshtein","corpus_id":1,"client_id":"2f5a513a-c07b-48c8-99eb-3f8dc312ec7f"}'
