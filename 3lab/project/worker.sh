@@ -1,1 +1,0 @@
-celery -A app.celery.app.app worker --loglevel=INFO
