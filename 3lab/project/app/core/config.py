@@ -5,7 +5,7 @@ from pydantic import AnyUrl, PostgresDsn, RedisDsn
 class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./sql_app.db"
 
-    SECRET_KEY: str = "Rita_key"  # Замените на сложный ключ в продакшене
+    SECRET_KEY: str = "Rita_key" 
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
