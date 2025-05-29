@@ -6,20 +6,61 @@ import requests
 from colorama import Fore, Style, init as colorama_init
 import logging
 from celery import Celery
+from urllib.parse import urlencode
 
 colorama_init()
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-API_URL = "http://localhost:8000"
+API_URL = "http://localhost:8000/user/login/"
 celery_app = Celery(
     'tasks',
-    broker='sqla+sqlite:///celerydb.sqlite', # очередь задач (в файле celerydb.sqlite)
-    backend='db+sqlite:///results.sqlite' # хранилище результатов (в файле results.sqlite)
+    broker='redis://localhost:6379/0',
+    backend='redis://localhost:6379/0'
 )
+
+
 def get_token(email: str, password: str) -> str:
-    response = requests.post(f"{API_URL}/auth/login/", json={"email": email, "password": password})
-    response.raise_for_status()
-    return response.json()["token"]
+    try:
+        # Query-параметры
+        params = {
+            "username": email,
+            "password": password,
+            "grant_type": "password"
+        }
+
+        # Form-data
+        data = {
+            "username": email,
+            "password": password,
+            "grant_type": "password"
+        }
+
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+
+
+        for attempt, payload in enumerate([{"params": params}, {"data": data}]):
+            try:
+                response = requests.post(
+                    API_URL,
+                    headers=headers,
+                    timeout=10,
+                    **payload
+                )
+                response.raise_for_status()
+                return response.json()["access_token"]
+            except Exception as e:
+                print(f"Attempt {attempt + 1} failed: {str(e)}")
+                continue
+
+        raise Exception("All authentication attempts failed")
+
+    except Exception as e:
+        print(f"[ERROR] Auth failed: {str(e)}")
+        if hasattr(e, 'response'):
+            print(f"Server response: {e.response.text}")
 
 def format_json(obj):
     return json.dumps(obj, indent=2, ensure_ascii=False)
@@ -69,9 +110,12 @@ async def run_interactive_session(token: str):
     print("\nAvailable commands: search, status, exit\n")
     while True:
         action = input("> ").strip().lower()
+
         if action == "exit":
             break
+
         elif action == "search":
+
             word = input("Word to search: ").strip()
             algorithm = input("Algorithm (levenshtein/ngram): ").strip()
             try:
@@ -120,3 +164,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
