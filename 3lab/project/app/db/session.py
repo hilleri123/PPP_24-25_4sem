@@ -8,7 +8,7 @@ from app.models.user import User
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/user/login/")
 
 def get_db(): # функция для соединения с базой данных
-    db = Session() #новую сессию подключения к базе данных
+    db = Session(bind=engine) #новую сессию подключения к базе данных
     try:
         yield db
     finally:
