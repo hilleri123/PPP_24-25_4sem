@@ -3,16 +3,14 @@ from sqlalchemy.orm import Session
 from celery.result import AsyncResult
 from app.services.fuzzy_search import levenshtein_distance, ngram_distance
 from app.models.corpus import Corpus
-from app.schemas.corpus import SearchRequest, SearchResponse
 from app.celery_worker import celery_app
-from app.db.session import get_db
+from app.db.session import get_db, get_current_user
 from app.models.user import User
-from app.db.session import get_current_user
-from typing import List, Dict, Any
+from app.schemas.corpus import (CorpusCreate, CorpusOut, CorpusListOut, SearchRequest, SearchResponse)
+from app.cruds import corpus as corpus_crud
 import time
 
 router = APIRouter(prefix="/api")
-
 
 @router.post("/search_algorithm", response_model=SearchResponse)
 def search_algorithm(
@@ -70,6 +68,15 @@ def start_search_task(
     return {"task_id": task.id}
 
 
+@router.get("/corpuses", response_model=CorpusListOut)
+def get_corpuses(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    corpuses = corpus_crud.get_corpuses(db)
+    return {"corpuses": corpuses}
+
+
 @router.get("/task_status/{task_id}")
 def get_task_status(
         task_id: str,
@@ -94,3 +101,11 @@ def get_task_status(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to fetch task status: {str(e)}"
         )
+
+@router.post("/upload_corpus", response_model=CorpusOut)
+def upload_corpus(
+    data: CorpusCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    return corpus_crud.create_corpus(db, data)
