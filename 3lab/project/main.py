@@ -15,3 +15,7 @@ async def startup_event():
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=False)
+
+#   uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+#   celery -A app.celery_worker.celery_app worker -P solo --loglevel=info
+#   python client.py
