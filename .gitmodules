@@ -1,0 +1,3 @@
+[submodule "scripts"]
+	path = scripts
+	url = git@github.com:hilleri123/PPP_24-25_4sem_scripts.git
