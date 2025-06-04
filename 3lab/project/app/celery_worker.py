@@ -24,9 +24,8 @@ def fuzzy_search_task(self, word: str, algorithm: str, corpus_id: int):
         results = []
 
         for idx, w in enumerate(words):
-            # Обновлённая логика расчёта расстояния
             if algorithm == "levenshtein":
-                distance = fuzzy_search.levenshtein_distance(word.lower(), w.lower())  # Добавляем lower()
+                distance = fuzzy_search.levenshtein_distance(word.lower(), w.lower())  
             elif algorithm == "ngram":
                 distance = round(fuzzy_search.ngram_distance(word, w) * 10)
             else:
@@ -42,13 +41,12 @@ def fuzzy_search_task(self, word: str, algorithm: str, corpus_id: int):
                 }
             )
 
-        # Сортируем и берём топ-10 независимо от расстояния
         sorted_results = sorted(results, key=lambda x: x["distance"])[:10]
 
         return {
-            "execution_time": 0.0,  # Замените на реальное время выполнения
+            "execution_time": 0.0,  
             "results": sorted_results,
-            "algorithm": algorithm  # Добавляем информацию о методе
+            "algorithm": algorithm 
         }
     finally:
         db.close()
