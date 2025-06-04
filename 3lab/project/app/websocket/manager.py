@@ -1,14 +1,17 @@
 import json
 from colorama import Fore, Style, init as colorama_init
 from celery import Celery
-
+import logging
+from app.celery_worker import celery_app
+import asyncio
 
 celery_app = Celery(
     'tasks',
     broker='redis://localhost:6379/0',
     backend='redis://localhost:6379/0'
 )
-
+colorama_init()
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 def color_block(label, color):
     return f"{color}{label}{Style.RESET_ALL}"
 
@@ -28,7 +31,7 @@ async def poll_status(task_id: str):
                 print(f"Task ID: {task_id}")
                 print("Задача завершилась, но результат отсутствует. Возможно, был указан несуществующий corpus_id.")
             elif "error" in res:
-                print(color_block("[ERROR]", Fore.RED))
+                # print(color_block("[ERROR]", Fore.RED))
                 print(f"Task ID: {task_id}")
                 print(f"Ошибка: {res['error']}")
             else:
