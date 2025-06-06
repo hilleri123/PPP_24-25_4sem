@@ -42,7 +42,7 @@ class AuthorCreate(AuthorBase):
 class AuthorOut(AuthorBase):
     id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
 class BookBase(BaseModel):
     title: str
     year: int
@@ -52,7 +52,7 @@ class BookCreate(BookBase):
 class BookOut(BookBase):
     id: int
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 app = FastAPI()
 
@@ -114,3 +114,6 @@ def create_book(book: BookCreate, db: Session = Depends(get_db)):
     db.refresh(b)
     return b
 
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
