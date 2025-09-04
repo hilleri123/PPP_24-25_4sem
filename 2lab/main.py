@@ -1,8 +1,7 @@
+from fastapi import FastAPI
+from app.api.endpoints import user, corpus
 
-def main():
-    # Ваш код здесь
-    pass
+app = FastAPI()
 
-if __name__ == "__main__":
-    main()
-
+app.include_router(user.router)
+app.include_router(corpus.router)
